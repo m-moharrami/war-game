@@ -3,6 +3,7 @@ const cardsContainer = document.getElementById("cards");
 const newDeckButton = document.getElementById("new-deck");
 const drawCardsButton = document.getElementById("draw-cards");
 const gameInfo = document.getElementById("game-info");
+const remainingText = document.getElementById("remaining");
 
 function handleClick() {
     fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
@@ -19,6 +20,7 @@ function drawCards() {
     fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
         .then(res => res.json())
         .then(data => {
+            remainingText.textContent = `Remaining Cards: ${data.remaining}`;
             cardsContainer.children[0].innerHTML = `
                 <img src=${data.cards[0].image} class="card" />
             `
