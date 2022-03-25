@@ -2,6 +2,7 @@ let deckId;
 const cardsContainer = document.getElementById("cards");
 const newDeckButton = document.getElementById("new-deck");
 const drawCardsButton = document.getElementById("draw-cards");
+const gameInfo = document.getElementById("game-info");
 
 function handleClick() {
     fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
@@ -24,6 +25,9 @@ function drawCards() {
             cardsContainer.children[1].innerHTML = `
                 <img src=${data.cards[1].image} class="card" />
             `
+            const winnerText = determineWinner(data.cards[0], data.cards[1]);
+            console.log(winnerText);
+            gameInfo.textContent = winnerText;
         })
 }
 
@@ -34,23 +38,11 @@ function determineWinner(card1, card2) {
     const card1ValueIndex = cardValues.indexOf(card1.value);
     const card2ValueIndex = cardValues.indexOf(card2.value);
 
-    console.log("card 1: " + card1ValueIndex);
-    console.log("card 2: " + card2ValueIndex);
-
     if (card1ValueIndex > card2ValueIndex) {
-        console.log("card 1 wins!");
+        return "Computer wins!";
     } else if (card1ValueIndex < card2ValueIndex) {
-        console.log("card 2 wins!");
-    } else {
-        console.log("it's a tie!");
+        return "You win!";
+    } else { 
+        return "WAR!";
     }
 }
-
-const card1Obj = {
-    value: "2"
-};
-const card2Obj = {
-    value: "ACE"
-};
-
-determineWinner(card1Obj, card2Obj);
