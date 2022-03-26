@@ -31,6 +31,8 @@ function drawCards() {
             const winnerText = determineWinner(data.cards[0], data.cards[1]);
             console.log(winnerText);
             gameInfo.textContent = winnerText;
+
+            if (data.remaining === 0) { drawCardsButton.setAttribute('disabled', ''); }
         })
 }
 
