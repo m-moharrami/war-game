@@ -36,7 +36,16 @@ function drawCards() {
             console.log(winnerText);
             gameInfo.textContent = winnerText;
 
-            if (data.remaining === 0) { drawCardsButton.setAttribute('disabled', ''); }
+            if (data.remaining === 0) { 
+                drawCardsButton.setAttribute('disabled', ''); 
+                if (playerScore > computerScore) {
+                    gameInfo.textContent = "You won this game!";
+                } else if (computerScore > playerScore) {
+                    gameInfo.textContent = "Computer won this game!";
+                } else {
+                    gameInfo.textContent = "There is no fucking winner!";
+                }
+            }
         })
 }
 
